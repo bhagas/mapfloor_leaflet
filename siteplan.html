@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+</head>
+<style>
+    #map { width: 736px; height: 736px; }
+    .leaflet-control-attribution { display: none;}
+</style>
+<body>
+    <div id="map"></div>
+</body>
+<script>
+    var map = L.map('map', {
+    crs: L.CRS.Simple,
+    minZoom: -3
+});
+
+var bounds = [[0,0], [736,736]]; // Set the image resolution as the boundary
+    L.imageOverlay('sp.jpg', bounds).addTo(map); // Set the background image
+
+    let data = [
+    {
+        x: 507,
+        y: 266
+    },
+    {
+        x: 200,
+        y: 266
+    }
+]
+
+data.forEach(itm=>{
+    L.circle([itm.x, itm.y], {color: 'green',radius: 35}).addTo(map)
+    .bindTooltip("Kamar 1", {permanent: true, direction: 'center'}).openTooltip();
+})
+
+
+    map.fitBounds(bounds);
+</script>
+</html>
